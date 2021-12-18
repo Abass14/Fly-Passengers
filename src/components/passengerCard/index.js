@@ -4,10 +4,10 @@ import Header from '../heading'
 import Paragraph from '../paragraph'
 import styles from './styles'
 
-export const PassengerCard = ({name, trips, airline, handleEdit}) => {
+export const PassengerCard = ({name, trips, airline, handleEdit, logo}) => {
     return (
         <View style={styles.wrapper}>
-            <ImageBackground source={{uri: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Thai_Airways_Logo.svg/200px-Thai_Airways_Logo.svg.png'}} resizeMode='contain' style={styles.flightImage}>
+            <ImageBackground source={{uri: logo}} resizeMode='contain' style={styles.flightImage}>
                 {/* <Image style={styles.imageView} source={require('../../../../assets/favicon.png')} /> */}
             </ImageBackground>
             <View style={styles.details}>

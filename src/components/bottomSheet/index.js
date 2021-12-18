@@ -5,21 +5,21 @@ import Header from '../heading'
 import Input from '../input'
 import styles from './styles'
 
-const Bottom = ({onChangeText, value}) => {
+const Bottom = ({onChangeName, onChangeTrips, valueName, valueTrips, onPress}) => {
     return (
         <View style={styles.wrapper}>
             <Header>Edit Passenger</Header>
             <Input 
                 placeholder="Enter Name"
-                onChangeText={onChangeText}
-                value={value}
+                onChangeText={onChangeName}
+                value={valueName}
             />
             <Input 
                 placeholder="Enter Trips"
-                onChangeText={onChangeText}
-                value={value}
+                onChangeText={onChangeTrips}
+                value={valueTrips}
             />
-            <CustomButton>Edit User</CustomButton>
+            <CustomButton onPress={onPress}>Edit User</CustomButton>
         </View>
     )
 }
