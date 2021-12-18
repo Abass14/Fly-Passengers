@@ -37,7 +37,7 @@ export default StyleSheet.create({
         paddingEnd: 10,
     },
     editBtn: {
-        backgroundColor: colors.PRIMARY,
+        backgroundColor: colors.DARK_BLUE,
         width: 100,
         height: 30,
         alignItems:'center',

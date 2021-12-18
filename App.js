@@ -1,19 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import BottomSheet from './src/components/bottomSheet';
-import Container from './src/components/container';
-import Input from './src/components/input';
-import PassengerCard from './src/components/passengerCard';
-import PopUp from './src/components/popUp';
-import GlobalProvider from './src/context/provider/Provider';
 import HomeScreen from './src/screens/homeScreen';
+import { Provider } from 'react-redux';
+import { Store } from './src/context/store/store';
 
 export default function App() {
   return (
-    <GlobalProvider>
+    <Provider store={Store}>
       <HomeScreen />
-    </GlobalProvider>
+    </Provider>
   );
 }
 

@@ -8,7 +8,6 @@ export const PassengerCard = ({name, trips, airline, handleEdit, logo}) => {
     return (
         <View style={styles.wrapper}>
             <ImageBackground source={{uri: logo}} resizeMode='contain' style={styles.flightImage}>
-                {/* <Image style={styles.imageView} source={require('../../../../assets/favicon.png')} /> */}
             </ImageBackground>
             <View style={styles.details}>
                 <View>
