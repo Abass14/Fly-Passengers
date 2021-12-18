@@ -6,7 +6,7 @@ export default StyleSheet.create({
         width: '100%',
         borderRadius: 10,
         elevation: 5,
-        height: 150,
+        height: 170,
         overflow: 'hidden',
         backgroundColor: colors.PRIMARY,
         opacity: 0.7
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     details:{
         flex: 2,
         paddingHorizontal: 10,
-        paddingTop: 15,
+        paddingTop: 35,
     },
     nameView:{
         flexDirection: 'row'

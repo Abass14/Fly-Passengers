@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { View, FlatList, Modal} from 'react-native'
+import { View, FlatList, Modal, ToastAndroid, Alert} from 'react-native'
 import Container from '../../components/container'
 import Header from '../../components/heading'
 import PassengerCard from '../../components/passengerCard'
@@ -48,14 +48,19 @@ const HomeScreen = () => {
 
     //method to edit passenger
     const handleUserEdit = async () => {
-        dispatch(await editPassengerss(passengerName, passengerTrips, id))
-        dispatch(getPassenger(currentPage))
-        bottomSheet.current.close()
+        if (passengerName.length === 0 || passengerTrips.length === 0) {
+            Alert.alert("Warning", "Fields can't be empty", ["OK"])
+        }
+        if (!(passengerName.length === 0 || passengerTrips.length === 0)) {
+            dispatch(await editPassengerss(passengerName, passengerTrips, id))
+            dispatch(getPassenger(currentPage))
+            bottomSheet.current.close()
+        }
     }
 
     //flatlist render item
     const renderItem = ({item}) => (
-        <View style={{marginBottom: 15}}>
+        <View style={{marginBottom: 10, flex: 1}}>
             <PassengerCard 
                 name={item.name}
                 trips={item.trips}
