@@ -1,117 +1,93 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { View, Text, FlatList, TouchableOpacity, Modal, ActivityIndicator, ToastAndroid } from 'react-native'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { View, FlatList, Modal, ToastAndroid, Alert} from 'react-native'
 import Container from '../../components/container'
 import Header from '../../components/heading'
 import PassengerCard from '../../components/passengerCard'
 import BottomSheet from "react-native-gesture-bottom-sheet";
 import Bottom from '../../components/bottomSheet'
 import PopUp from '../../components/popUp'
-import colors from '../../../assets/colors/colors'
+import { useSelector, useDispatch } from 'react-redux';
+import { editPassengerss, getPassenger } from '../../context/action/action'
+import renderLoader from '../../components/loader/renderLoader'
 
 const HomeScreen = () => {
-    const [passengers, setPassenger] = useState([])
     const [id, setId] = useState("")
     const [passengerName, setPassengerName] = useState("")
-    const [passengerTrips, setPassengerTrips] = useState(null)
+    const [passengerTrips, setPassengerTrips] = useState("")
     const [currentPage, setCurrentPage] = useState(0)
-    const [count, setCount] = useState(0)
+    const [showPopup, setShowPopup] = useState(false)
+    const {data} = useSelector(state => state.getPasssengerReducer)
+    const dispatch = useDispatch()
+
+    const pName = useRef("")
 
     const bottomSheet = useRef();
-
-    const getPassengers = async () => {
-        try {
-          const response = await fetch(`https://api.instantwebtools.net/v1/passenger?page=${currentPage}&size=10`);
-          const json = await response.json();
-            setPassenger([...passengers, ...json.data]);
-        } catch (error) {
-          console.error(error)
-        }
-      }
     
-    const editPassenger = async (id, name, trips) => {
-        try {
-            const response = await fetch(`https://api.instantwebtools.net/v1/passenger/${id}`, {
-                method: 'PATCH',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: name,
-                    trips: trips
-                })
-            })
-        }catch (error) {
-            console.error(error)
-        }
-    }
-
-    useEffect(() => {
-        getPassengers()
-    }, [currentPage])
-
-    const [showPopup, setShowPopup] = useState(false)
-    
+    //method to show edit form and set unique Id
     const handleEdit = (id) => {
         bottomSheet.current.show()
         setId(id)
     }
 
-    const handleCancel = () => {
-        
-    }
-
+    //method to close popUp
     const handleContinue = () => {
-
+        setShowPopup(false)
     }
 
-    const renderLoader = () => {
-        return (
-            <View style={{marginBottom: 15}}>
-                <ActivityIndicator size="large" color={colors.LIGHT_RED} />
-            </View>
-        )
-    }
-
-    const getCount = () => {
-
-    }
-
-    const loadMorePassengers = (index) => {
+    //method to render more items (pagination)
+    const loadMorePassengers = () => {
         setCurrentPage(currentPage + 1)
     }
 
-    const openPopup = (index) => {
-        if (index === 29) {
-            console.log("pop up")
+    //method to open popup if 100 items has been rendered
+    const openPopup = () => {
+        if (currentPage === 10) {
+            setShowPopup(true)
         }
     }
 
-    const handleUserEdit = () => {
-        editPassenger(id, passengerName, passengerTrips)
-        getPassengers()
-        bottomSheet.current.close()
+    //method to edit passenger
+    const handleUserEdit = async () => {
+        if (passengerName.length === 0 || passengerTrips.length === 0) {
+            Alert.alert("Warning", "Fields can't be empty", ["OK"])
+        }
+        if (!(passengerName.length === 0 || passengerTrips.length === 0)) {
+            dispatch(await editPassengerss(passengerName, passengerTrips, id))
+            dispatch(getPassenger(currentPage))
+            bottomSheet.current.close()
+        }
     }
+
+    //flatlist render item
+    const renderItem = ({item}) => (
+        <View style={{marginBottom: 10, flex: 1}}>
+            <PassengerCard 
+                name={item.name}
+                trips={item.trips}
+                handleEdit={() => handleEdit(item._id)}
+            />
+        </View>
+    )
+
+    //memorized flatlist rendered item for better performance
+    const memorizedList = useMemo(() => renderItem, [data])
+
+    //use efffect for side effect functions
+    useEffect(() => {
+        pName.current = passengerName
+        openPopup()
+        dispatch(getPassenger(currentPage))
+    }, [passengerName, currentPage])
 
     return (
         <Container>
-            <Header>Passengers</Header>
+            <Header style={{fontSize: 25}}>Passengers</Header>
             <View>
                 <FlatList 
-                    style={{width: '100%', marginBottom: 30}}
+                    style={{width: '100%', marginBottom: 100}}
                     keyExtractor={(item, index)=>index.toString()}
-                    data={passengers}
-                    renderItem={passengers =>(
-                        <View style={{marginBottom: 15}}>
-                            <PassengerCard 
-                                name={passengers.item.name}
-                                trips={passengers.item.trips}
-                                airline={passengers.item.airline[0].name}
-                                logo={passengers.item.airline[0].logo}
-                                handleEdit={() => handleEdit(passengers.item._id)}
-                            />
-                        </View>
-                    )}
+                    data={data}
+                    renderItem={memorizedList}
                     ListFooterComponent={renderLoader}
                     onEndReached={loadMorePassengers}
                     onEndReachedThreshold={0.5}
@@ -134,7 +110,6 @@ const HomeScreen = () => {
                     animationType='slide'
                 >
                     <PopUp 
-                        onPressCancel={handleCancel}
                         onPressContinue={handleContinue}
                     />
                 </Modal>

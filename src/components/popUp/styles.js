@@ -4,14 +4,14 @@ import colors from "../../../assets/colors/colors";
 export default StyleSheet.create({
     wrapper: {
         width: '100%',
-        height: 150,
-        borderRadius: 10,
+        height: 200,
+        borderRadius: 20,
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
         backgroundColor: colors.LIGHT_RED,
         position: 'absolute',
-        bottom: 0
+        bottom: 0,
         
     },
     headerView: {
@@ -20,12 +20,11 @@ export default StyleSheet.create({
     },
     btnRow: {
         flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
         width: '100%',
     },
     button: {
-        width: 100,
+        width: '100%',
+        height: 50,
         backgroundColor: colors.PRIMARY,
         marginVertical: 10,
         alignItems: 'center',
@@ -39,8 +38,6 @@ export default StyleSheet.create({
         start: 20
     },
     btnView1: {
-        position: 'absolute',
-        bottom: 10,
-        end: 20
+        marginHorizontal: 20
     }
 })

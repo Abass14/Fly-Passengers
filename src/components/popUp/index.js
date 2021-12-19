@@ -4,17 +4,14 @@ import CustomButton from '../button'
 import Header from '../heading'
 import styles from './styles'
 
-const PopUp = ({onPressCancel, onPressContinue}) => {
+const PopUp = ({onPressContinue}) => {
     return (
         <View style={styles.wrapper}>
             <View style={styles.headerView}>
-                <Header>Yay! 100 passengers</Header>
+                <Header>Yay! You've viewed over 100 passengers</Header>
             </View>
             
             <View style={styles.btnRow}>
-                <View style={styles.btnView}>
-                    <CustomButton onPress={onPressCancel} style={styles.button}>Cancel</CustomButton>
-                </View>
                 <View style={styles.btnView1}>
                     <CustomButton onPress={onPressContinue} style={styles.button}>Continue</CustomButton>
                 </View>

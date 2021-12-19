@@ -6,7 +6,7 @@ export default StyleSheet.create({
         width: '100%',
         borderRadius: 10,
         elevation: 5,
-        height: 150,
+        height: 170,
         overflow: 'hidden',
         backgroundColor: colors.PRIMARY,
         opacity: 0.7
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     details:{
         flex: 2,
         paddingHorizontal: 10,
-        paddingTop: 15,
+        paddingTop: 25,
     },
     nameView:{
         flexDirection: 'row'
@@ -35,9 +35,14 @@ export default StyleSheet.create({
     paragraph:{
         fontWeight: 'bold',
         paddingEnd: 10,
+        fontSize: 20
+    },
+    paragraph1:{
+        paddingEnd: 10,
+        fontSize: 20
     },
     editBtn: {
-        backgroundColor: colors.PRIMARY,
+        backgroundColor: colors.DARK_BLUE,
         width: 100,
         height: 30,
         alignItems:'center',
