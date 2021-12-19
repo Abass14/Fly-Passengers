@@ -19,7 +19,7 @@ const HomeScreen = () => {
     const {data} = useSelector(state => state.getPasssengerReducer)
     const dispatch = useDispatch()
 
-    const pName = useRef("")
+    // const pName = useRef("")
 
     const bottomSheet = useRef();
     
@@ -74,10 +74,10 @@ const HomeScreen = () => {
 
     //use efffect for side effect functions
     useEffect(() => {
-        pName.current = passengerName
+        // pName.current = passengerName
         openPopup()
         dispatch(getPassenger(currentPage))
-    }, [passengerName, currentPage])
+    }, [currentPage])
 
     return (
         <Container>

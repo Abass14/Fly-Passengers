@@ -11,7 +11,6 @@ const getPasssengerReducer = (state = passengerData, action) => {
             }
         case EDIT_PASSENGER:{
             const prevPasengerIndex = state.data.findIndex((passenger) => passenger._id === action.payload._id)
-            console.log("prev" + prevPasengerIndex)
             let updatedSate = [...state.data]
             if (prevPasengerIndex > -1) {
                 updatedSate[prevPasengerIndex] = action.payload
