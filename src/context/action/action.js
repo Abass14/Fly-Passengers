@@ -40,7 +40,12 @@ export const editPassengerss = async (name, trips, id) => {
             })
             if (response) {
                 dispatch({
-                    type: EDIT_PASSENGER
+                    type: EDIT_PASSENGER,
+                    payload: {
+                        _id: id,
+                        name: name,
+                        trips: trips
+                    }
                 })
             }
         }

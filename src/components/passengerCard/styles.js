@@ -23,7 +23,7 @@ export default StyleSheet.create({
     details:{
         flex: 2,
         paddingHorizontal: 10,
-        paddingTop: 35,
+        paddingTop: 25,
     },
     nameView:{
         flexDirection: 'row'
@@ -35,6 +35,11 @@ export default StyleSheet.create({
     paragraph:{
         fontWeight: 'bold',
         paddingEnd: 10,
+        fontSize: 20
+    },
+    paragraph1:{
+        paddingEnd: 10,
+        fontSize: 20
     },
     editBtn: {
         backgroundColor: colors.DARK_BLUE,

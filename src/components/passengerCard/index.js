@@ -4,25 +4,23 @@ import Header from '../heading'
 import Paragraph from '../paragraph'
 import styles from './styles'
 
-export const PassengerCard = ({name, trips, airline, handleEdit, logo}) => {
+export const PassengerCard = ({name, trips, handleEdit}) => {
     return (
         <View style={styles.wrapper}>
-            <ImageBackground source={{uri: logo}} resizeMode='contain' style={styles.flightImage}>
+            <ImageBackground source={{uri: "https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Thai_Airways_Logo.svg/200px-Thai_Airways_Logo.svg.png"}} resizeMode='contain' style={styles.flightImage}>
             </ImageBackground>
             <View style={styles.details}>
                 <View>
                     <View style={styles.nameView}>
                         <Paragraph style={styles.paragraph}>Name:</Paragraph>
-                        <Paragraph>{name}</Paragraph>
+                        <Paragraph style={styles.paragraph1}>{name}</Paragraph>
                     </View>
                     <View style={styles.nameView}>
                         <Paragraph style={styles.paragraph}>Trips:</Paragraph>
-                        <Paragraph>{trips}</Paragraph>
+                        <Paragraph style={styles.paragraph1}>{trips}</Paragraph>
                     </View>
                     <View style={styles.nameViews}>
                         <View style={{flexDirection: 'row'}}>
-                            <Paragraph style={styles.paragraph}>Airline:</Paragraph>
-                            <Paragraph>{airline}</Paragraph>
                         </View>
                         <TouchableOpacity onPress={handleEdit} style={styles.editBtn}>
                             <Paragraph style={styles.editBtnText}>EDIT</Paragraph>

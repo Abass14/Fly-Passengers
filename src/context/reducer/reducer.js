@@ -9,10 +9,18 @@ const getPasssengerReducer = (state = passengerData, action) => {
                 ...state, 
                 data: [...state.data, ...action.payload]
             }
-        case EDIT_PASSENGER:
-            return {
-                ...state
+        case EDIT_PASSENGER:{
+            const prevPasengerIndex = state.data.findIndex((passenger) => passenger._id === action.payload._id)
+            console.log("prev" + prevPasengerIndex)
+            let updatedSate = [...state.data]
+            if (prevPasengerIndex > -1) {
+                updatedSate[prevPasengerIndex] = action.payload
             }
+            return {
+                ...state,
+                data: updatedSate
+            }
+        } 
         default:
             return state
     }

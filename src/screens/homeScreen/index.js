@@ -64,8 +64,6 @@ const HomeScreen = () => {
             <PassengerCard 
                 name={item.name}
                 trips={item.trips}
-                airline={item.airline[0].name}
-                logo={item.airline[0].logo}
                 handleEdit={() => handleEdit(item._id)}
             />
         </View>
